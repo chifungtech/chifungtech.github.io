@@ -1,5 +1,5 @@
 # chifungtech.github.io
-building websit
+building website
 
 other apps
 1. https://chifungcatalog.lovable.app
