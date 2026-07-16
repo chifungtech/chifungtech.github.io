@@ -1,110 +1,241 @@
-        body {
-            font-family: "微軟正黑體", sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #faf8f5;
-            color: #3d3d3d;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            text-align: center;
-        }
-        h1 {
-            color: #8b3a3a;
-            font-size: 32px;
-            border-bottom: 3px solid #d4b896;
-            padding-bottom: 15px;
-            display: inline-block;
-        }
-        .subtitle {
-            font-size: 18px;
-            color: #6b5b4b;
-            margin: 20px 0;
-        }
-        .info-box {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            margin: 20px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            text-align: left;
-        }
-        .info-box h2 {
-            color: #8b3a3a;
-            font-size: 20px;
-            border-left: 4px solid #d4b896;
-            padding-left: 12px;
-        }
-        .info-box p {
-            line-height: 1.8;
-            margin: 8px 0;
-        }
+ /* ===== 全域設定 ===== */
+body {
+    font-family: "PingFang TC", "微軟正黑體", "Microsoft JhengHei", "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f3ee;
+    color: #2c2c2c;
+    line-height: 1.8;
+}
 
-        .info-box img {
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-            width: 100%;
-            margin-bottom: 15px;
-        }
-        .cta-button {
-            display: inline-block;
-            background-color: #8b3a3a;
-            color: white;
-            padding: 15px 40px;
-            font-size: 18px;
-            border-radius: 30px;
-            text-decoration: none;
-            margin-top: 15px;
-        }
-        .cta-button:hover {
-            background-color: #6b2a2a;
-        }
-        .footer {
-            margin-top: 40px;
-            font-size: 14px;
-            color: #999;
-            border-top: 1px solid #e0d6cc;
-            padding-top: 20px;
-        }
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    text-align: center;
+}
 
+/* ===== 標題與副標 ===== */
+h1 {
+    color: #7a3b3b;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    position: relative;
+    padding-bottom: 18px;
+    margin-bottom: 8px;
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #7a3b3b, #d4b896);
+    margin: 12px auto 0;
+    border-radius: 2px;
+}
+
+.subtitle {
+    font-size: 18px;
+    color: #7f8c8d;
+    letter-spacing: 3px;
+    margin: 12px 0 30px 0;
+}
+
+/* ===== 資訊卡片 ===== */
+.info-box {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 28px 30px;
+    margin: 24px 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 1px solid rgba(232, 221, 208, 0.3);
+    transition: box-shadow 0.3s ease;
+    text-align: left;
+}
+
+.info-box:hover {
+    box-shadow: 0 8px 35px rgba(0,0,0,0.10);
+}
+
+.info-box h2 {
+    color: #7a3b3b;
+    font-size: 20px;
+    font-weight: 600;
+    border-left: 4px solid #d4b896;
+    padding-left: 14px;
+    margin-top: 0;
+}
+
+.info-box p {
+    line-height: 1.8;
+    margin: 8px 0;
+    color: #3d3d3d;
+}
+
+.info-box img {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* ===== CTA 按鈕 ===== */
+.cta-button {
+    display: inline-block;
+    background: linear-gradient(135deg, #7a3b3b, #a05252);
+    color: white;
+    padding: 16px 50px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 6px 25px rgba(122, 59, 59, 0.35);
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 35px rgba(122, 59, 59, 0.45);
+    background: linear-gradient(135deg, #6a2e2e, #8a4444);
+}
+
+/* ===== 圖片滾動畫廊 ===== */
 .gallery-scroll {
     display: flex;
-    overflow-x: auto;          
-    gap: 15px;                
+    overflow-x: auto;
+    gap: 15px;
     padding: 10px 0 20px 0;
-    scroll-snap-type: x mandatory; 
+    scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
 }
 
 .gallery-scroll .gallery-item {
-    flex: 0 0 auto;            
-    width: 280px;              
-    scroll-snap-align: start;  
-    border-radius: 10px;
+    flex: 0 0 auto;
+    width: 280px;
+    scroll-snap-align: start;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    background: white;
+    transition: transform 0.3s ease;
+}
+
+.gallery-scroll .gallery-item:hover {
+    transform: scale(1.02);
 }
 
 .gallery-scroll .gallery-item img {
     width: 100%;
-    height: 200px;             
-    object-fit: cover;         
+    height: 200px;
+    object-fit: cover;
     display: block;
 }
 
 .gallery-scroll .gallery-item .caption {
-    padding: 10px;
+    padding: 12px;
     background: white;
     font-size: 14px;
     color: #555;
     text-align: center;
+    font-weight: 500;
 }
 
 .gallery-hint {
     font-size: 14px;
-    color: #999;
+    color: #aaa;
     text-align: center;
     margin-top: 5px;
+    letter-spacing: 1px;
+}
+
+/* ===== 頁尾 ===== */
+.footer {
+    margin-top: 50px;
+    font-size: 14px;
+    color: #bbb;
+    border-top: 1px solid #e8ddd0;
+    padding-top: 25px;
+    letter-spacing: 1px;
+}
+
+/* ===== WhatsApp 浮動按鈕 ===== */
+.whatsapp-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #25D366;
+    color: white;
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+    z-index: 9999;
+    text-decoration: none;
+    font-size: 32px;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 35px rgba(37, 211, 102, 0.55);
+}
+
+/* ===== 手機版響應式 ===== */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px 16px;
+    }
+    
+    h1 {
+        font-size: 26px;
+    }
+    
+    h1::after {
+        width: 60px;
+    }
+    
+    .subtitle {
+        font-size: 15px;
+        letter-spacing: 2px;
+    }
+    
+    .info-box {
+        padding: 20px 18px;
+        margin: 16px 0;
+    }
+    
+    .info-box h2 {
+        font-size: 18px;
+    }
+    
+    .gallery-scroll .gallery-item {
+        width: 200px;
+    }
+    
+    .gallery-scroll .gallery-item img {
+        height: 150px;
+    }
+    
+    .cta-button {
+        padding: 14px 30px;
+        font-size: 16px;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+    
+    .whatsapp-float {
+        width: 56px;
+        height: 56px;
+        font-size: 28px;
+        bottom: 16px;
+        right: 16px;
+    }
 }
