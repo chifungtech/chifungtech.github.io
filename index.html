@@ -1,170 +1,64 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>智鋒中醫手法調理</title>
-    <!-- 引用外部 CSS -->
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>智鋒中醫手法調理</title>
+  <meta name="description" content="智鋒中醫手法調理提供專業評估、手法調理與保健建議。" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
+  <header class="site-header">
+    <a class="brand" href="index.html">智鋒中醫</a>
+    <nav class="site-nav" aria-label="主選單">
+      <a class="active" href="index.html">首頁</a>
+      <a href="about.html">關於我們</a>
+      <a href="services.html">服務項目</a>
+      <a href="contact.html">聯絡我們</a>
+    </nav>
+  </header>
 
-        <!-- ===== 主標題 ===== -->
-        <h1>智鋒中醫手法調理</h1>
-        <p class="subtitle">傳承經典 · 細心調理 · 守護您的健康</p>
+  <main class="page-content">
+    <section class="hero card">
+      <div>
+        <p class="eyebrow">傳承經典 · 細心調理</p>
+        <h1>讓身體重新找到舒適與平衡</h1>
+        <p>我們提供以手法調理與生活建議為核心的整體保健服務，協助您舒緩因久坐、壓力與生活節奏帶來的不適。</p>
+        <a class="button" href="contact.html">立即預約</a>
+      </div>
+      <img src="headache.jpg" alt="中醫手法調理情境" />
+    </section>
 
-        <!-- ===== 痛點文案（已調整用詞） ===== -->
-        <div class="pain-point">
-            <p class="big">「長期頭痛、肩頸僵硬，<span>影響生活品質</span>？」</p>
-            <p class="sub">我們提供專業手法調理，協助您找回身體的舒適與平衡。</p>
-        </div>
+    <section class="card">
+      <h2>為什麼選擇我們</h2>
+      <div class="feature-grid">
+        <article>
+          <h3>專業評估</h3>
+          <p>從身體狀況、生活習慣與需求出發，提供清楚的調理方向。</p>
+        </article>
+        <article>
+          <h3>細緻手法</h3>
+          <p>以舒適與安全為原則，針對肩頸、腰背與頭部不適做個別處理。</p>
+        </article>
+        <article>
+          <h3>日常保健</h3>
+          <p>除調理之外，也提供居家保養與姿勢習慣的建議，讓改善更持久。</p>
+        </article>
+      </div>
+    </section>
 
-        <!-- ===== 圖片 ===== -->
-        <img src="headache.jpg" alt="是否經常頭痛，嚴重到影響日常生活？" width="100%" />
+    <section class="card gallery-card">
+      <h2>診間與服務實景</h2>
+      <div class="gallery">
+        <img src="pic1.jpg" alt="診間實景一" />
+        <img src="pic2.jpg" alt="診間實景二" />
+        <img src="pic3.jpg" alt="診間實景三" />
+      </div>
+    </section>
+  </main>
 
-        <!-- ===== YouTube Shorts 播放清單 ===== -->
-        <iframe
-            width="315"
-            height="560"
-            src="https://www.youtube.com/embed/videoseries?si=qm4O0brd9ERyRS5T&amp;list=PLayP5TBPUPYQ"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-        </iframe>
-
-        <!-- ===== 關於醫師（專業資格，無療效宣稱） ===== -->
-        <div class="info-box">
-            <h2>👨‍⚕️ 關於林智恆 手法調理師</h2>
-            <p>
-                <strong>📜 專業資格</strong><br />
-                • <br />
-                • <br />
-                • 
-            </p>
-            <p>
-                <strong>🏥 臨床經驗</strong><br />
-                • 超過 10 年手法調理經驗<br />
-                • 專注：頭痛、偏頭痛、肩頸不適、腰部痠痛、體質保健
-            </p>
-        </div>
-
-        <!-- ===== 服務項目 ===== -->
-        <div class="info-box">
-            <h2>🏥 服務項目</h2>
-            <p>✔ 手法調理<br />✔ 體質調理 · ✔ 運動損傷 · ✔ 養生保健諮詢</p>
-        </div>
-
-        <!-- ===== 調理流程（原「治療流程」） ===== -->
-        <div class="info-box" style="background: #f7f3ee; border: 1px solid #e8ddd0;">
-            <h2>📋 您的調理流程</h2>
-            <div class="step-list">
-                <div class="step-item">
-                    <span class="step-num">1</span>
-                    <span class="step-text"><strong>初步諮詢</strong> – 了解您的症狀與病史</span>
-                </div>
-                <div class="step-item">
-                    <span class="step-num">2</span>
-                    <span class="step-text"><strong>專業評估</strong> – 找出問題根源</span>
-                </div>
-                <div class="step-item">
-                    <span class="step-num">3</span>
-                    <span class="step-text"><strong>個人化手法治療</strong> – 針對您的需求進行調理</span>
-                </div>
-                <div class="step-item">
-                    <span class="step-num">4</span>
-                    <span class="step-text"><strong>後續保健建議</strong> – 協助您維持身體平衡</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===== 圖片畫廊 ===== -->
-        <div class="info-box">
-            <h2>📸 手法調理過程</h2>
-            <div class="gallery-scroll">
-                <div class="gallery-item">
-                    <img src="pic1.jpg" alt="a" />
-                    <div class="caption">a</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="pic2.jpg" alt="b" />
-                    <div class="caption">b</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="pic3.jpg" alt="c" />
-                    <div class="caption">c</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="pic4.jpg" alt="d" />
-                    <div class="caption">d</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="pic5.jpg" alt="e" />
-                    <div class="caption">e</div>
-                </div>
-            </div>
-            <p class="gallery-hint">👆 左右滑動查看更多照片</p>
-        </div>
-
-        <!-- ===== 顧客回饋（改為「衛教」風格，避免療效宣稱） ===== -->
-        <div class="info-box" style="background: #f7f3ee; border: 1px solid #e8ddd0;">
-            <h2>⭐ 顧客回饋</h2>
-            <div class="testimonial">
-                <p class="quote">「長期偏頭痛困擾了我三年，經過林調理師三次手法調理後，頭痛頻率明顯降低，真的很感謝！」</p>
-                <p class="author">— 陳小姐，45歲，辦公室主管</p>
-            </div>
-            <div class="testimonial">
-                <p class="quote">「因為工作久坐導致腰痛，試過很多方法都沒改善。林調理師的手法很細膩，還會教我日常保健動作，非常專業。」</p>
-                <p class="author">— 李先生，38歲，工程師</p>
-            </div>
-            <p style="font-size: 13px; color: #999; margin-top: 10px; text-align: center;">
-                * 以上為個人主觀感受，實際效果因體質而異，建議諮詢專業醫師。
-            </p>
-        </div>
-
-        <!-- ===== 常見問題 FAQ（已確保無療效宣稱） ===== -->
-        <div class="info-box">
-            <h2>❓ 常見問題</h2>
-            <div class="faq-item">
-                <p class="q">Q：手法調理會痛嗎？</p>
-                <p class="a">A：過程中可能會有痠脹感，這是正常的反應。我們的調理師會根據您的承受程度調整力度，以舒適為原則。</p>
-            </div>
-            <div class="faq-item">
-                <p class="q">Q：需要幾次才能感受到效果？</p>
-                <p class="a">A：每個人的狀況不同，一般建議先進行一次完整評估，調理師會根據您的情況提供個人化的調理建議。</p>
-            </div>
-            <div class="faq-item">
-                <p class="q">Q：首次預約需要帶什麼？</p>
-                <p class="a">A：建議攜帶相關的醫療報告（如 X 光片、MRI 報告），以及穿著寬鬆舒適的衣物，方便評估與調理。</p>
-            </div>
-        </div>
-
-        <!-- ===== 聯絡資訊 ===== -->
-        <div class="info-box">
-            <h2>📞 聯絡資訊</h2>
-            <p><strong>地址：</strong>預約時決定</p>
-            <p><strong>電話：</strong>61446243</p>
-            <p><strong>看診時間：</strong>預約時決定</p>
-        </div>
-
-        <!-- ===== CTA 按鈕 ===== -->
-        <a href="tel:85261446243" class="cta-button">📞 免費諮詢・立即預約</a>
-        <p style="font-size: 14px; color: #888; margin-top: 10px;">
-            🔹 首次預約可享完整評估服務 🔹
-        </p>
-
-        <!-- ===== 頁尾 ===== -->
-        <div class="footer">
-            © 2026 智鋒科技公司 版權所有
-        </div>
-    </div>
-
-    <!-- ===== WhatsApp 浮動按鈕 ===== -->
-    <a href="https://wa.me/85261446243?text=你好，我想查詢預約中醫手法調理。"
-       target="_blank"
-       class="whatsapp-float">
-        <span class="icon">💬</span> WhatsApp 立即諮詢
-    </a>
-
+  <footer class="site-footer">
+    © 2026 智鋒科技公司。版權所有。
+  </footer>
 </body>
 </html>
