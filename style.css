@@ -12,6 +12,12 @@ body {
 
 a { color: inherit; text-decoration: none; }
 
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 .site-header {
   position: fixed;
   top: 0;
@@ -116,14 +122,24 @@ h3 {
 }
 
 .hero img,
-.gallery img {
+.gallery img,
+.full-image {
   width: 100%;
   border-radius: 12px;
   object-fit: cover;
 }
 
 .hero img {
-  height: 320px;
+  height: clamp(220px, 34vw, 320px);
+  max-height: 420px;
+  object-fit: cover;
+}
+
+.full-image {
+  margin-top: 16px;
+  max-height: min(70vh, 540px);
+  object-fit: contain;
+  background: #f5ebdf;
 }
 
 .demo-section {
@@ -176,7 +192,9 @@ h3 {
 }
 
 .gallery img {
-  height: 220px;
+  aspect-ratio: 4 / 3;
+  min-height: 200px;
+  height: auto;
 }
 
 .site-footer {
@@ -215,7 +233,7 @@ h3 {
   }
 
   .hero img {
-    height: 260px;
+    height: clamp(220px, 55vw, 280px);
   }
 }
 
@@ -249,7 +267,11 @@ h3 {
   }
 
   .gallery img {
-    height: 200px;
+    min-height: 180px;
+  }
+
+  .full-image {
+    max-height: 50vh;
   }
 
   .whatsapp-float {
