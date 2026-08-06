@@ -75,6 +75,26 @@ img {
   box-shadow: 0 8px 24px rgba(0,0,0,0.06);
 }
 
+.card__body {
+  display: grid;
+  gap: 24px;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .card__body {
+    grid-template-columns: 1fr minmax(320px, 45%);
+  }
+}
+
+.card__media .full-image {
+  margin-top: 0;
+}
+
+.card__body > * {
+  min-width: 0;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(24px);
