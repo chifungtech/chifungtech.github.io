@@ -55,5 +55,25 @@
   </footer>
 
   <a href="https://wa.me/85261446243?text=你好，我想查詢中醫手法調理預約。" target="_blank" rel="noreferrer" class="whatsapp-float">💬 WhatsApp</a>
+
+  <script>
+    const revealItems = document.querySelectorAll('.card, .feature-grid article, .service-list article, .gallery img, .video-frame, .button, .hero img, .full-image');
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    revealItems.forEach((item) => {
+      item.classList.add('reveal');
+      revealObserver.observe(item);
+    });
+  </script>
 </body>
 </html>
