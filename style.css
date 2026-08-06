@@ -152,6 +152,42 @@ h3 {
   background: #5d2d2d;
 }
 
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  min-width: 2.2rem;
+  margin-right: 0.75rem;
+  background: #f4e6d8;
+  color: #7a3b3b;
+  border-radius: 999px;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.icon-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.contact-list li,
+.steps li,
+.card__copy li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.feature-grid article h3,
+.service-list article h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 .hero img,
 .gallery img,
 .full-image {
