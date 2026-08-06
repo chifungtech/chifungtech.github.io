@@ -152,6 +152,16 @@ h3 {
   background: #5d2d2d;
 }
 
+.guarantee-note {
+  margin-top: 16px;
+  display: inline-block;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: rgba(122, 59, 59, 0.1);
+  color: #7a3b3b;
+  font-weight: 700;
+}
+
 .icon {
   display: inline-flex;
   align-items: center;
