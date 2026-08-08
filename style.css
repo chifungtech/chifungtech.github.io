@@ -183,7 +183,7 @@ h3 {
   gap: 0.75rem;
 }
 
-.ul, .ol {
+ul, ol {
   list-style: none;
   padding-left: 0;
   margin-left: 0;
