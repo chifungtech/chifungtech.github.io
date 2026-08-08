@@ -263,9 +263,26 @@ ul, ol {
 
 .feature-grid article,
 .service-list article {
-  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 18px;
   background: #fcf7f0;
   border-radius: 12px;
+  min-height: 180px;
+}
+
+.feature-grid article h3,
+.service-list article h3 {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 12px;
+}
+
+.feature-grid article p,
+.service-list article p {
+  margin: 0;
 }
 
 .gallery {
