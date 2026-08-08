@@ -51,6 +51,12 @@ img {
   border-radius: 8px;
 }
 
+.brand-text {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #7a3b3b;
+}
+
 .site-nav {
   display: flex;
   gap: 12px;
