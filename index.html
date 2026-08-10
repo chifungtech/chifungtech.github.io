@@ -46,6 +46,7 @@
       <img src="taichi_logo.png" alt="智鋒中醫品牌標誌" class="site-logo" />
       <span class="brand-text">智鋒中醫</span>
     </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-label="顯示選單">☰ 選單</button>
     <nav class="site-nav" aria-label="主選單">
       <a class="active" href="index.html">首頁</a>
       <a href="about.html">關於我們</a>
@@ -140,6 +141,28 @@
       item.classList.add('reveal');
       revealObserver.observe(item);
     });
+
+    const navToggle = document.querySelector('.nav-toggle');
+    const header = document.querySelector('.site-header');
+
+    if (navToggle && header) {
+      navToggle.addEventListener('click', () => {
+        const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', String(!expanded));
+        header.classList.toggle('open');
+      });
+    }
+
+    const whatsAppButton = document.querySelector('.whatsapp-float');
+    const updateWhatsAppOpacity = () => {
+      if (!whatsAppButton) return;
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+      const nearBottom = scrollPosition >= pageHeight - 120;
+      whatsAppButton.classList.toggle('dimmed', nearBottom);
+    };
+    window.addEventListener('scroll', updateWhatsAppOpacity, { passive: true });
+    updateWhatsAppOpacity();
   </script>
 </body>
 </html>
