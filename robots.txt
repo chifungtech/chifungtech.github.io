@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://chifungtech.github.io/sitemap.xml
