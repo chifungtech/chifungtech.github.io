@@ -119,6 +119,75 @@ img {
   }
 }
 
+.flowchart {
+  display: grid;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.flow-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 18px 20px 18px 16px;
+  background: linear-gradient(145deg, #fffdf9, #f7efe5);
+  border: 1px solid rgba(122, 59, 59, 0.1);
+  border-radius: 16px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+.flow-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 31px;
+  bottom: -18px;
+  width: 2px;
+  height: 18px;
+  background: linear-gradient(180deg, #d6a77f, #7a3b3b);
+}
+
+.flow-step:not(:last-child)::before {
+  content: "↓";
+  position: absolute;
+  left: 23px;
+  bottom: -28px;
+  color: #7a3b3b;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.step-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #7a3b3b;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.flow-content {
+  min-width: 0;
+}
+
+.flow-content h3 {
+  margin: 0 0 6px;
+  font-size: clamp(1.2rem, 1.4vw, 1.45rem);
+}
+
+.flow-content p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #544a42;
+}
+
 .card__media .full-image {
   margin-top: 0;
 }
