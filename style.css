@@ -3,10 +3,10 @@
 body {
   margin: 0;
   font-family: "PingFang TC", "微軟正黑體", Arial, sans-serif;
-  font-size: 20px;
+  font-size: clamp(20px, 0.9vw + 17px, 24px);
   color: #2c211d;
   background: #f7f2eb;
-  line-height: 2;
+  line-height: 1.8;
   padding-top: 96px;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -245,6 +245,27 @@ main.page-content > section {
   }
 }
 
+@media (max-width: 600px) {
+  body {
+    font-size: 22px;
+    line-height: 1.9;
+  }
+
+  .site-header {
+    padding: 12px 16px;
+  }
+
+  .site-nav a,
+  .nav-toggle {
+    font-size: 1.04rem;
+  }
+
+  .button {
+    font-size: 1.18rem;
+    width: 100%;
+  }
+}
+
 .hero {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
@@ -271,23 +292,24 @@ h1, h2, h3 {
 }
 
 h1 {
-  font-size: clamp(2.5rem, 2.9vw, 3.4rem);
+  font-size: clamp(2.8rem, 3.2vw, 4rem);
   margin-bottom: 0.45em;
 }
 
 h2 {
-  font-size: clamp(1.9rem, 2.2vw, 2.5rem);
+  font-size: clamp(2.1rem, 2.5vw, 2.9rem);
   margin-bottom: 0.6em;
 }
 
 h3 {
-  font-size: clamp(1.4rem, 1.7vw, 1.7rem);
+  font-size: clamp(1.6rem, 1.9vw, 2.1rem);
   margin-bottom: 0.5em;
 }
 
 p {
   margin: 0 0 1em;
   color: #493d36;
+  font-size: 1.03em;
 }
 
 ul,
@@ -315,7 +337,7 @@ li + li {
   background: #7a3b3b;
   color: #fff;
   font-weight: 800;
-  font-size: 1.2rem;
+  font-size: 1.28rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   box-shadow: 0 8px 24px rgba(122, 59, 59, 0.14);
 }
