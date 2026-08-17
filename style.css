@@ -444,6 +444,7 @@ ul, ol {
   display: block;
   width: 100%;
   height: auto;
+  max-width: 100%;
   border-radius: 12px;
   content-visibility: auto;
 }
@@ -451,14 +452,12 @@ ul, ol {
 .hero img {
   max-height: 420px;
   object-fit: cover;
-  aspect-ratio: 4 / 3;
 }
 
 .gallery img {
   object-fit: contain;
   background: #f5ebdf;
   padding: 6px;
-  aspect-ratio: 4 / 3;
 }
 
 .full-image {
@@ -466,7 +465,6 @@ ul, ol {
   max-height: none;
   object-fit: contain;
   background: #f5ebdf;
-  aspect-ratio: 16 / 10;
 }
 
 .demo-section {
@@ -735,12 +733,12 @@ ul, ol {
     aspect-ratio: 16 / 9;
   }
 
-  .gallery img {
-    min-height: auto;
-  }
-
+  .gallery img,
   .full-image {
+    width: 100%;
+    height: auto;
     max-height: none;
+    object-fit: contain;
   }
 
   .whatsapp-float {
