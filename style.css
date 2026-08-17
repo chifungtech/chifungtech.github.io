@@ -726,6 +726,15 @@ ul, ol {
     padding: 20px;
   }
 
+  .video-frame {
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    border-radius: 0;
+    aspect-ratio: 16 / 9;
+  }
+
   .gallery img {
     min-height: auto;
   }
