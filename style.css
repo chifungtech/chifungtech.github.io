@@ -27,6 +27,7 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
+  width: auto;
 }
 
 .site-header {
@@ -260,6 +261,15 @@ main.page-content > section {
     font-size: 1.04rem;
   }
 
+  .hero {
+    gap: 18px;
+  }
+
+  .hero img {
+    margin-top: 4px;
+    border-radius: 14px;
+  }
+
   .button {
     font-size: 1.18rem;
     width: 100%;
@@ -431,29 +441,32 @@ ul, ol {
 .hero img,
 .gallery img,
 .full-image {
+  display: block;
   width: 100%;
+  height: auto;
   border-radius: 12px;
   content-visibility: auto;
 }
 
 .hero img {
-  height: clamp(220px, 34vw, 320px);
   max-height: 420px;
   object-fit: cover;
   aspect-ratio: 4 / 3;
 }
 
 .gallery img {
-  object-fit: contain;
+  object-fit: cover;
   background: #f5ebdf;
   padding: 6px;
+  aspect-ratio: 4 / 3;
 }
 
 .full-image {
   margin-top: 16px;
-  max-height: min(70vh, 540px);
-  object-fit: contain;
+  max-height: none;
+  object-fit: cover;
   background: #f5ebdf;
+  aspect-ratio: 16 / 10;
 }
 
 .demo-section {
@@ -625,6 +638,13 @@ ul, ol {
   opacity: 0.6;
 }
 
+.whatsapp-float.transparent {
+  opacity: 0.5;
+  background: rgba(37, 211, 102, 0.14);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: none;
+}
+
 .whatsapp-float:hover {
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 14px 36px rgba(37, 211, 102, 0.45);
@@ -638,7 +658,9 @@ ul, ol {
   }
 
   .hero img {
-    height: clamp(220px, 55vw, 280px);
+    width: 100%;
+    height: auto;
+    max-height: none;
   }
 }
 
@@ -705,11 +727,11 @@ ul, ol {
   }
 
   .gallery img {
-    min-height: 180px;
+    min-height: auto;
   }
 
   .full-image {
-    max-height: 50vh;
+    max-height: none;
   }
 
   .whatsapp-float {
@@ -727,6 +749,10 @@ ul, ol {
   .site-nav a {
     padding: 8px 10px;
     font-size: 1rem;
+  }
+
+  .cta-row {
+    flex-direction: column;
   }
 
   h1 {

@@ -212,14 +212,22 @@
     }
 
     const whatsAppButton = document.querySelector('.whatsapp-float');
+    const inlineWhatsAppButtons = document.querySelectorAll('a[href*="wa.me"]:not(.whatsapp-float)');
     const updateWhatsAppOpacity = () => {
       if (!whatsAppButton) return;
       const scrollPosition = window.scrollY + window.innerHeight;
       const pageHeight = document.documentElement.scrollHeight;
       const nearBottom = scrollPosition >= pageHeight - 120;
-      whatsAppButton.classList.toggle('dimmed', nearBottom);
+      const hasVisibleInlineWhatsApp = [...inlineWhatsAppButtons].some((button) => {
+        const rect = button.getBoundingClientRect();
+        return rect.top < window.innerHeight && rect.bottom > 0;
+      });
+
+      whatsAppButton.classList.toggle('transparent', hasVisibleInlineWhatsApp);
+      whatsAppButton.classList.toggle('dimmed', !hasVisibleInlineWhatsApp && nearBottom);
     };
     window.addEventListener('scroll', updateWhatsAppOpacity, { passive: true });
+    window.addEventListener('resize', updateWhatsAppOpacity, { passive: true });
     updateWhatsAppOpacity();
   </script>
 </body>
