@@ -19,10 +19,16 @@
   <meta name="twitter:title" content="智鋒中醫手法調理｜頭痛、肩頸、腰痛專業舒緩" />
   <meta name="twitter:description" content="智鋒中醫手法治療，專注頭痛、肩頸僵硬、腰痛等問題的調理。超過10年經驗，提供個人化手法治療方案。立即預約免費諮詢！" />
   <meta name="twitter:image" content="https://chifungtech.github.io/headache.jpg" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+  <link rel="preconnect" href="https://www.youtube.com" />
+  <link rel="dns-prefetch" href="https://www.youtube.com" />
+  <link rel="preload" href="headache.jpg" as="image" fetchpriority="high" />
+  <link rel="preload" href="taichi_logo.png" as="image" />
   <title>智鋒中醫手法調理</title>
   <meta name="description" content="智鋒中醫手法治療，專注頭痛、肩頸僵硬、腰痛等問題的調理。超過10年經驗，提供個人化手法治療方案。立即預約免費諮詢！" />  
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18321476060">
+<script defer src="https://www.googletagmanager.com/gtag/js?id=AW-18321476060">
 </script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -85,7 +91,7 @@
         </div>
         <p class="guarantee-note">不成功不收費，讓您安心嘗試。</p>
       </div>
-      <img src="headache.jpg" alt="中醫師為顧客施行手法調理的診療情境" loading="lazy" decoding="async" />
+      <img src="headache.jpg" alt="中醫師為顧客施行手法調理的診療情境" width="1200" height="900" loading="eager" fetchpriority="high" decoding="async" sizes="(max-width: 700px) 100vw, 50vw" />
     </section>
 
     <section class="card info-section" aria-labelledby="info-title">
@@ -164,9 +170,9 @@
     <section class="card gallery-card">
       <h2>診間與服務實景</h2>
       <div class="gallery">
-        <img src="pic1.jpg" alt="溫馨中醫診間一角，展示舒適就診環境" loading="lazy" decoding="async" />
-        <img src="pic2.jpg" alt="治療中醫師向患者解說手法調理過程" loading="lazy" decoding="async" />
-        <img src="pic3.jpg" alt="舒適診療空間，強調放鬆與整體健康氛圍" loading="lazy" decoding="async" />
+        <img src="pic1.jpg" alt="溫馨中醫診間一角，展示舒適就診環境" width="800" height="600" loading="lazy" decoding="async" sizes="(max-width: 700px) 100vw, 33vw" />
+        <img src="pic2.jpg" alt="治療中醫師向患者解說手法調理過程" width="800" height="600" loading="lazy" decoding="async" sizes="(max-width: 700px) 100vw, 33vw" />
+        <img src="pic3.jpg" alt="舒適診療空間，強調放鬆與整體健康氛圍" width="800" height="600" loading="lazy" decoding="async" sizes="(max-width: 700px) 100vw, 33vw" />
       </div>
     </section>
   </main>
@@ -178,7 +184,7 @@
 
   <a href="https://wa.me/85261446243?text=你好，我想查詢中醫手法調理預約。請先告訴我最困擾的部位與狀況，謝謝。" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="透過 WhatsApp 快速聯絡智鋒中醫">WhatsApp</a>
 
-  <script>
+  <script defer>
     const revealItems = document.querySelectorAll('.card, .feature-grid article, .service-list article, .gallery img, .video-frame, .button, .hero img, .full-image');
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
