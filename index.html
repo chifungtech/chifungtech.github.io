@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google.com https://www.googleadservices.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://www.google.com https://ssl.google-analytics.com; connect-src 'self' https://www.googletagmanager.com https://www.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://ad.doubleclick.net https://www.google-analytics.com https://stats.g.doubleclick.net https://region1.google-analytics.com; frame-src 'self' https://www.googletagmanager.com;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google.com https://www.googleadservices.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://www.google.com https://ssl.google-analytics.com; connect-src 'self' https://www.googletagmanager.com https://www.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://ad.doubleclick.net https://www.google-analytics.com https://stats.g.doubleclick.net https://region1.google-analytics.com; frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com;" />
   <link rel="canonical" href="https://chifungtech.github.io/" />
   <meta name="robots" content="index,follow" />
   <meta name="author" content="智鋒中醫" />
@@ -100,12 +100,12 @@
       </div>
       <div class="video-frame">
         <iframe
-          src="https://www.youtube.com/embed/videoseries?si=67DKMku0-RYfuB9Z&amp;list=PLayP5TBPUPYQ"
+          src="https://www.youtube-nocookie.com/embed/videoseries?list=PLayP5TBPUPYQ&amp;origin=https%3A%2F%2Fchifungtech.github.io"
           title="YouTube video player"
-          loading="lazy"
+          loading="eager"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
+          referrerpolicy="no-referrer-when-downgrade"
           allowfullscreen></iframe>
       </div>
     </section>
@@ -183,7 +183,7 @@
   <a href="https://wa.me/85261446243?text=你好，我想查詢中醫手法調理預約。請先告訴我最困擾的部位與狀況，謝謝。" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="透過 WhatsApp 快速聯絡智鋒中醫">WhatsApp</a>
 
   <script defer>
-    const revealItems = document.querySelectorAll('.card, .feature-grid article, .service-list article, .gallery img, .video-frame, .button, .hero img, .full-image');
+    const revealItems = document.querySelectorAll('.card, .feature-grid article, .service-list article, .gallery img, .button, .hero img, .full-image');
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
