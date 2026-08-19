@@ -117,8 +117,6 @@ img {
   padding: clamp(20px, 3vw, 34px);
   margin-bottom: 20px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-  content-visibility: auto;
-  contain-intrinsic-size: 760px 440px;
 }
 
 main.page-content > section {
@@ -446,7 +444,6 @@ ul, ol {
   height: auto;
   max-width: 100%;
   border-radius: 12px;
-  content-visibility: auto;
 }
 
 .hero img {
