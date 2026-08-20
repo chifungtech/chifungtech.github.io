@@ -614,6 +614,24 @@ ul, ol {
   line-height: 1.7;
 }
 
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 8px auto 12px;
+}
+
+.footer-nav a {
+  color: #7a3b3b;
+  font-weight: 700;
+}
+
+.footer-nav a:hover,
+.footer-nav a:focus-visible {
+  text-decoration: underline;
+}
+
 .whatsapp-float {
   position: fixed;
   right: 24px;
