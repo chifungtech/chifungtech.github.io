@@ -5,9 +5,9 @@ function gtag() {
 gtag('js', new Date());
 gtag('config', 'AW-18321476060');
 
-const revealItems = document.querySelectorAll(
+const revealItems = [...document.querySelectorAll(
   '.card, .feature-grid article, .service-list article, .gallery img, .video-frame, .button, .hero img, .full-image'
-);
+)].filter((item) => !item.closest('.article-page'));
 
 if ('IntersectionObserver' in window) {
   const revealObserver = new IntersectionObserver((entries, observer) => {
