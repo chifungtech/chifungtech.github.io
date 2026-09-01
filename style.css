@@ -5,7 +5,7 @@ body {
   font-family: "PingFang TC", "微軟正黑體", Arial, sans-serif;
   font-size: clamp(20px, 0.9vw + 17px, 24px);
   color: #2c211d;
-  background: #f7f2eb;
+  background: radial-gradient(circle at top, #fffdfb 0%, #f9f0e8 38%, #f3e8df 100%);
   line-height: 1.8;
   padding-top: 96px;
   -webkit-font-smoothing: antialiased;
@@ -14,6 +14,11 @@ body {
 }
 
 a { color: inherit; text-decoration: none; }
+
+a:hover,
+a:focus-visible {
+  text-decoration: none;
+}
 
 p,
 li,
@@ -41,9 +46,11 @@ img {
   align-items: center;
   gap: 16px;
   padding: 16px 24px;
-  background: rgba(247, 242, 235, 0.95);
-  border-bottom: 1px solid rgba(255,255,255,0.25);
-  box-shadow: none;
+  background: rgba(247, 242, 235, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(122, 59, 59, 0.08);
+  box-shadow: 0 10px 28px rgba(122, 59, 59, 0.06);
 }
 
 .brand {
@@ -106,7 +113,7 @@ img {
 }
 
 .page-content {
-  max-width: 980px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 24px 16px 48px;
 }
@@ -116,11 +123,12 @@ img {
 }
 
 .card {
-  background: #fffdf9;
-  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,250,245,0.96));
+  border: 1px solid rgba(122, 59, 59, 0.08);
+  border-radius: 22px;
   padding: clamp(20px, 3vw, 34px);
   margin-bottom: 20px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  box-shadow: 0 12px 28px rgba(95, 72, 58, 0.08);
 }
 
 .article-hero {
@@ -655,6 +663,15 @@ main.page-content > section {
   margin-bottom: 8px;
 }
 
+.section-intro {
+  max-width: 760px;
+  margin-bottom: 18px;
+}
+
+.section-intro p:last-child {
+  margin-bottom: 0;
+}
+
 h1, h2, h3 {
   color: #7a3b3b;
   line-height: 1.3;
@@ -704,12 +721,12 @@ li + li {
   justify-content: center;
   padding: 16px 24px;
   border-radius: 999px;
-  background: #7a3b3b;
+  background: linear-gradient(135deg, #7a3b3b, #9b5b4d);
   color: #fff;
   font-weight: 800;
   font-size: 1.28rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  box-shadow: 0 8px 24px rgba(122, 59, 59, 0.14);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 10px 24px rgba(122, 59, 59, 0.18);
 }
 
 .button:hover {
@@ -826,14 +843,54 @@ ul, ol {
   background: #f5ebdf;
 }
 
+.contact-card__body {
+  display: grid;
+  gap: 24px;
+  align-items: center;
+}
+
+.contact-card__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-card__media .full-image {
+  width: min(100%, 420px);
+  max-height: 360px;
+  margin-top: 0;
+  object-fit: cover;
+  border: 1px solid rgba(122, 59, 59, 0.08);
+  box-shadow: 0 10px 22px rgba(122, 59, 59, 0.08);
+}
+
 .douyin-photo {
   display: block;
   width: min(100%, 520px);
+  max-height: 420px;
   height: auto;
   margin: 16px auto 0;
-  object-fit: contain;
+  object-fit: cover;
   background: #f5ebdf;
+  border: 1px solid rgba(122, 59, 59, 0.08);
   border-radius: 12px;
+}
+
+@media (min-width: 900px) {
+  .contact-card__body {
+    grid-template-columns: minmax(0, 1.2fr) minmax(260px, 420px);
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-card__body {
+    gap: 18px;
+  }
+
+  .contact-card__media .full-image,
+  .douyin-photo {
+    max-height: 260px;
+  }
 }
 
 .demo-section {
@@ -861,10 +918,10 @@ ul, ol {
   flex-direction: column;
   gap: 12px;
   padding: 18px;
-  border-radius: 14px;
+  border-radius: 16px;
   background: linear-gradient(145deg, #fffdf9, #f8ebde);
   border: 1px solid rgba(122, 59, 59, 0.08);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 8px 18px rgba(122, 59, 59, 0.04);
 }
 
 .info-card h3 {
@@ -936,11 +993,20 @@ ul, ol {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 20px 18px;
-  background: #fcf7f0;
-  border-radius: 14px;
+  padding: 22px 20px;
+  background: linear-gradient(180deg, #fffdf9, #f8f0e8);
+  border-radius: 16px;
   min-height: 180px;
-  border: 1px solid rgba(122, 59, 59, 0.05);
+  border: 1px solid rgba(122, 59, 59, 0.06);
+  box-shadow: 0 8px 18px rgba(122, 59, 59, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.feature-grid article:hover,
+.service-list article:hover {
+  transform: translateY(-3px);
+  border-color: rgba(122, 59, 59, 0.14);
+  box-shadow: 0 12px 24px rgba(122, 59, 59, 0.08);
 }
 
 .feature-grid article h3,
