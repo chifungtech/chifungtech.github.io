@@ -1,10 +1,3 @@
-window.dataLayer = window.dataLayer || [];
-function gtag() {
-  window.dataLayer.push(arguments);
-}
-gtag('js', new Date());
-gtag('config', 'AW-18321476060');
-
 const revealItems = [...document.querySelectorAll(
   '.card, .feature-grid article, .service-list article, .gallery img, .video-frame, .button, .hero img, .full-image'
 )].filter((item) => !item.closest('.article-page'));
