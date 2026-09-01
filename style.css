@@ -547,10 +547,11 @@ main.page-content > section {
 }
 
 .hero {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 28px;
-  align-items: center;
+  display: block;
+  padding: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(122, 59, 59, 0.08);
 }
 
 .hero > div {
@@ -822,12 +823,14 @@ ul, ol {
   width: 100%;
   height: auto;
   max-width: 100%;
-  border-radius: 12px;
+  border-radius: 0;
 }
 
 .hero img {
   max-height: none;
   object-fit: contain;
+  border-radius: 0;
+  background: #fff;
 }
 
 .gallery img {
