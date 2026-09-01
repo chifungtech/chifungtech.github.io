@@ -228,8 +228,8 @@ img {
 .article-visual img {
   width: 100%;
   display: block;
-  max-height: 420px;
-  object-fit: cover;
+  max-height: none;
+  object-fit: contain;
 }
 
 .article-visual__caption {
@@ -826,8 +826,8 @@ ul, ol {
 }
 
 .hero img {
-  max-height: 420px;
-  object-fit: cover;
+  max-height: none;
+  object-fit: contain;
 }
 
 .gallery img {
@@ -856,10 +856,10 @@ ul, ol {
 }
 
 .contact-card__media .full-image {
-  width: min(100%, 420px);
-  max-height: 360px;
+  width: min(100%, 480px);
+  max-height: none;
   margin-top: 0;
-  object-fit: cover;
+  object-fit: contain;
   border: 1px solid rgba(122, 59, 59, 0.08);
   box-shadow: 0 10px 22px rgba(122, 59, 59, 0.08);
 }
@@ -867,10 +867,10 @@ ul, ol {
 .douyin-photo {
   display: block;
   width: min(100%, 520px);
-  max-height: 420px;
+  max-height: none;
   height: auto;
   margin: 16px auto 0;
-  object-fit: cover;
+  object-fit: contain;
   background: #f5ebdf;
   border: 1px solid rgba(122, 59, 59, 0.08);
   border-radius: 12px;
@@ -1116,6 +1116,7 @@ ul, ol {
     width: 100%;
     height: auto;
     max-height: none;
+    object-fit: contain;
   }
 }
 
