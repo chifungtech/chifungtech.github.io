@@ -227,6 +227,8 @@ img {
   padding: 0;
   overflow: hidden;
   border: 1px solid rgba(122, 59, 59, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(95, 72, 58, 0.08);
   background: #fff;
 }
 
@@ -939,12 +941,16 @@ ul, ol {
 
 .hero img,
 .gallery img,
-.full-image {
+.full-image,
+.article-visual img,
+.douyin-photo {
   display: block;
   width: 100%;
   height: auto;
   max-width: 100%;
-  border-radius: 0;
+  border: 1px solid rgba(122, 59, 59, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(95, 72, 58, 0.08);
 }
 
 .hero img {
@@ -952,7 +958,6 @@ ul, ol {
   width: min(100%, 500px);
   max-width: 500px;
   object-fit: contain;
-  border-radius: 18px;
   background: #f9f3eb;
 }
 
@@ -986,8 +991,6 @@ ul, ol {
   max-height: none;
   margin-top: 0;
   object-fit: contain;
-  border: 1px solid rgba(122, 59, 59, 0.08);
-  box-shadow: 0 10px 22px rgba(122, 59, 59, 0.08);
 }
 
 .douyin-photo {
@@ -998,8 +1001,6 @@ ul, ol {
   margin: 16px auto 0;
   object-fit: contain;
   background: #f5ebdf;
-  border: 1px solid rgba(122, 59, 59, 0.08);
-  border-radius: 12px;
 }
 
 @media (min-width: 900px) {
@@ -1172,7 +1173,7 @@ ul, ol {
   aspect-ratio: 4 / 3;
   min-height: 200px;
   height: auto;
-  border-radius: 14px;
+  border-radius: 16px;
 }
 
 .site-footer {
