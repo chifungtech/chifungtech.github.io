@@ -1077,14 +1077,27 @@ ul, ol {
   line-height: 1;
 }
 
-.info-card a {
+.info-card__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 52px;
   margin-top: auto;
+  padding: 10px 14px;
   color: #7a3b3b;
   font-weight: 700;
+  border: 2px solid rgba(122, 59, 59, 0.28);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
-.info-card a:hover {
-  text-decoration: underline;
+.info-card__link:hover,
+.info-card__link:focus-visible {
+  color: #5b2929;
+  border-color: #7a3b3b;
+  background: #fff;
+  transform: translateY(-1px);
 }
 
 .video-frame {
@@ -1208,11 +1221,6 @@ ul, ol {
   border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-.whatsapp-float::before {
-  content: "⚡";
-  font-size: 1.05rem;
-}
-
 .whatsapp-float.dimmed {
   opacity: 0.6;
 }
@@ -1254,24 +1262,36 @@ ul, ol {
 }
 
 @media (max-width: 800px) {
+  body {
+    padding-top: 92px;
+  }
+
   .site-header {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
+    flex-direction: row;
+    align-items: center;
     padding: 14px 16px;
   }
 
   .nav-toggle {
     display: inline-flex;
     justify-content: center;
-    width: 100%;
+    width: auto;
+    margin-left: auto;
   }
 
   .site-nav {
     display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     flex-direction: column;
-    gap: 8px;
+    gap: 4px;
     width: 100%;
+    padding: 10px 16px 14px;
+    background: rgba(247, 242, 235, 0.98);
+    border-top: 1px solid rgba(122, 59, 59, 0.1);
+    box-shadow: 0 14px 24px rgba(95, 72, 58, 0.12);
   }
 
   .site-header.open .site-nav {
@@ -1279,7 +1299,9 @@ ul, ol {
   }
 
   .site-nav a {
-    padding: 12px 14px;
+    display: block;
+    width: 100%;
+    padding: 10px 14px;
     font-size: 1.05rem;
     background: #fffdf9;
     border-radius: 12px;
@@ -1288,13 +1310,12 @@ ul, ol {
 
 @media (max-width: 640px) {
   body {
-    padding-top: 124px;
+    padding-top: 92px;
   }
 
   .site-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    flex-direction: row;
+    align-items: center;
     padding: 14px 16px;
   }
 
@@ -1303,7 +1324,7 @@ ul, ol {
   }
 
   .site-nav a {
-    padding: 8px 10px;
+    padding: 10px 12px;
     font-size: 1rem;
   }
 
@@ -1341,7 +1362,7 @@ ul, ol {
 @media (max-width: 480px) {
   .site-nav {
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
 
   .site-nav a {

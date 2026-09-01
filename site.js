@@ -27,6 +27,7 @@ if (navToggle && header) {
   navToggle.addEventListener('click', () => {
     const expanded = navToggle.getAttribute('aria-expanded') === 'true';
     navToggle.setAttribute('aria-expanded', String(!expanded));
+    navToggle.setAttribute('aria-label', expanded ? '顯示選單' : '關閉選單');
     header.classList.toggle('open');
   });
 }
