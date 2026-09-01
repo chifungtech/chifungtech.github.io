@@ -613,6 +613,17 @@ section.hero > img {
   color: #7a3b3b;
 }
 
+.hero-inline-suggestion {
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(122, 59, 59, 0.06);
+  color: #5d433d;
+  font-size: 1rem;
+  line-height: 1.7;
+  font-weight: 700;
+}
+
 .hero-overlay__actions {
   display: flex;
   flex-wrap: wrap;
