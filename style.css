@@ -575,6 +575,16 @@ section.hero > img {
   background: #f9f3eb;
 }
 
+.headpain-hero-image {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  margin-left: auto;
+  object-fit: contain;
+  border-radius: 18px;
+  background: #f9f3eb;
+}
+
 .hero-lead {
   max-width: 34rem;
   font-size: 1.08em;
