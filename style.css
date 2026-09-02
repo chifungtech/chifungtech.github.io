@@ -1268,7 +1268,7 @@ ul, ol {
 .back-to-top {
   position: fixed;
   right: 24px;
-  bottom: 96px;
+  bottom: 148px;
   z-index: 1090;
   display: inline-flex;
   align-items: center;
@@ -1367,7 +1367,7 @@ ul, ol {
 
   .back-to-top {
     right: 16px;
-    bottom: 84px;
+    bottom: 116px;
     padding: 10px 14px;
     font-size: 0.85rem;
   }
