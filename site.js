@@ -32,6 +32,29 @@ if (navToggle && header) {
   });
 }
 
+const backToTopButton = document.createElement('button');
+backToTopButton.type = 'button';
+backToTopButton.className = 'back-to-top';
+backToTopButton.setAttribute('aria-label', '回到頁面頂端');
+backToTopButton.textContent = '↑ 回到頂部';
+
+document.body.appendChild(backToTopButton);
+
+const updateBackToTopVisibility = () => {
+  if (window.scrollY > 300) {
+    backToTopButton.classList.add('visible');
+  } else {
+    backToTopButton.classList.remove('visible');
+  }
+};
+
+backToTopButton.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+updateBackToTopVisibility();
+
 const navItems = document.querySelectorAll('.nav-item');
 
 const syncMobileNavLinks = () => {
