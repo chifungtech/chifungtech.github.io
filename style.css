@@ -106,6 +106,14 @@ img {
   justify-content: center;
 }
 
+.nav-link {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+}
+
 .nav-link::after {
   content: ' ▾';
   font-size: 0.8em;
@@ -1420,6 +1428,10 @@ ul, ol {
     background: #fffdf9;
     border-radius: 12px;
     text-align: left;
+  }
+
+  .nav-link {
+    width: 100%;
   }
 
   .nav-link::after {
