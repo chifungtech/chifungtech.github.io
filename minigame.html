@@ -251,6 +251,34 @@
       font-weight: 800;
     }
 
+    .game-jump-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 20px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .game-jump-nav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1rem;
+      border-radius: 999px;
+      background: #f7efe6;
+      border: 1px solid rgba(122, 59, 59, 0.08);
+      color: var(--stone-dark);
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+
+    .game-jump-nav a:hover,
+    .game-jump-nav a:focus-visible {
+      background: #f0dfcc;
+      outline: none;
+    }
+
     .tcm-game-section {
       margin-top: 28px;
     }
@@ -355,6 +383,33 @@
       color: var(--stone-dark);
     }
 
+    .acupoint-game-section {
+      margin-top: 28px;
+    }
+
+    .acupoint-shell {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 20px;
+      margin-top: 18px;
+    }
+
+    .acupoint-card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(240, 236, 228, 0.92));
+      border: 1px solid rgba(122, 59, 59, 0.08);
+      border-radius: 22px;
+      padding: 22px 20px;
+    }
+
+    .acupoint-card h2 {
+      margin: 0;
+      font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+      color: var(--stone-dark);
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+    }
+
     @media (max-width: 900px) {
       .game-shell {
         grid-template-columns: 1fr;
@@ -404,7 +459,13 @@
   </header>
 
   <main class="game-page">
-    <section class="game-shell">
+    <nav class="game-jump-nav" aria-label="遊戲快速導航">
+      <a href="#star-game">星星遊戲</a>
+      <a href="#tcm-game">辨證測驗</a>
+      <a href="#acupoint-game">穴位速答</a>
+    </nav>
+
+    <section class="game-shell" id="star-game">
       <div class="game-card">
         <div class="game-header">
           <p class="eyebrow">小遊戲</p>
@@ -460,7 +521,7 @@
       </aside>
     </section>
 
-    <section class="game-card tcm-game-section">
+    <section class="game-card tcm-game-section" id="tcm-game">
       <div class="game-header">
         <p class="eyebrow">中醫養生測驗</p>
         <h1>辨證配穴小挑戰</h1>
@@ -492,6 +553,40 @@
       </div>
 
       <p id="quiz-status" class="status">點擊「開始測驗」，測試你的中醫辨識力。</p>
+    </section>
+
+    <section class="game-card acupoint-game-section" id="acupoint-game">
+      <div class="game-header">
+        <p class="eyebrow">穴位知識</p>
+        <h1>穴位速答挑戰</h1>
+        <p class="game-lead">看提示描述，選出最適合的穴位名稱。這些都是經常在中醫養生與針灸討論中會遇到的常見穴位。</p>
+      </div>
+
+      <div class="acupoint-shell">
+        <div class="acupoint-card">
+          <p class="quiz-label">穴位提示</p>
+          <h2 id="acupoint-question">準備中</h2>
+          <div id="acupoint-options" class="option-grid" aria-live="polite"></div>
+        </div>
+
+        <div class="quiz-side">
+          <div class="quiz-box">
+            <span>得分</span>
+            <strong id="acupoint-score">0</strong>
+          </div>
+          <div class="quiz-box">
+            <span>題目</span>
+            <strong id="acupoint-progress">0 / 0</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="acupoint-start" class="button" type="button">開始穴位測驗</button>
+        <button id="acupoint-reset" class="button button--secondary" type="button">重新開始</button>
+      </div>
+
+      <p id="acupoint-status" class="status">點擊「開始穴位測驗」，挑戰你對穴位的記憶。</p>
     </section>
   </main>
 
@@ -671,13 +766,17 @@
     let quizScore = 0;
     let quizLocked = false;
 
-    function shuffleOptions(options) {
-      const shuffled = [...options];
+    function shuffleArray(items) {
+      const shuffled = [...items];
       for (let i = shuffled.length - 1; i > 0; i -= 1) {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
       }
       return shuffled;
+    }
+
+    function shuffleOptions(options) {
+      return shuffleArray(options);
     }
 
     function renderQuestion() {
@@ -744,9 +843,12 @@
     }
 
     function resetQuiz() {
+      const shuffledQuestions = shuffleArray(tcmQuestions);
       quizIndex = 0;
       quizScore = 0;
       quizLocked = false;
+      tcmQuestions.length = 0;
+      tcmQuestions.push(...shuffledQuestions);
       quizScoreEl.textContent = quizScore;
       quizProgressEl.textContent = `0 / ${tcmQuestions.length}`;
       quizStatusEl.textContent = '中醫辨證小挑戰開始，請選擇最合適的調理方向。';
@@ -761,7 +863,132 @@
       resetQuiz();
     });
 
+    const acupointQuestions = [
+      {
+        prompt: '這個穴位位於肩部外側，常與肩頸緊張有關。',
+        answer: '肩井',
+        options: ['肩井', '合谷', '太衝', '中脘']
+      },
+      {
+        prompt: '這個穴位位於手背第一、二掌骨之間，常被用來緩解頭痛與肩頸不適。',
+        answer: '合谷',
+        options: ['合谷', '攢竹', '血海', '三陰交']
+      },
+      {
+        prompt: '這個穴位位於腹部中央，常和消化與腹脹相關。',
+        answer: '中脘',
+        options: ['中脘', '膻中', '關元', '湧泉']
+      },
+      {
+        prompt: '這個穴位位於足部內側踝上方，常與調理女性經絡與下肢疲勞有關。',
+        answer: '三陰交',
+        options: ['三陰交', '太衝', '湧泉', '內關']
+      },
+      {
+        prompt: '這個穴位位於足底前部，常被視為與安神及舒緩疲勞有關。',
+        answer: '湧泉',
+        options: ['湧泉', '肩井', '合谷', '中脘']
+      }
+    ];
+
+    const acupointQuestionEl = document.getElementById('acupoint-question');
+    const acupointOptionsEl = document.getElementById('acupoint-options');
+    const acupointScoreEl = document.getElementById('acupoint-score');
+    const acupointProgressEl = document.getElementById('acupoint-progress');
+    const acupointStatusEl = document.getElementById('acupoint-status');
+    const acupointStartButton = document.getElementById('acupoint-start');
+    const acupointResetButton = document.getElementById('acupoint-reset');
+
+    let acupointIndex = 0;
+    let acupointScore = 0;
+    let acupointLocked = false;
+
+    function renderAcupointQuestion() {
+      const current = acupointQuestions[acupointIndex];
+      if (!current) {
+        acupointQuestionEl.textContent = '測驗完成';
+        acupointOptionsEl.innerHTML = '';
+        acupointProgressEl.textContent = `${acupointQuestions.length} / ${acupointQuestions.length}`;
+        const gradeText = acupointScore >= 4 ? '穴位知識很強！' : acupointScore >= 2 ? '基礎很不錯！' : '再複習一下穴位常識。';
+        acupointStatusEl.textContent = `${gradeText} 你答對了 ${acupointScore} 題。`;
+        acupointLocked = true;
+        return;
+      }
+
+      acupointQuestionEl.textContent = current.prompt;
+      acupointProgressEl.textContent = `${acupointIndex + 1} / ${acupointQuestions.length}`;
+      acupointOptionsEl.innerHTML = '';
+      acupointLocked = false;
+
+      const shuffledOptions = shuffleOptions(current.options);
+
+      shuffledOptions.forEach((option) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'option-btn';
+        button.textContent = option;
+
+        button.addEventListener('click', () => {
+          if (acupointLocked) return;
+          acupointLocked = true;
+
+          const allButtons = acupointOptionsEl.querySelectorAll('.option-btn');
+          allButtons.forEach((item) => {
+            item.disabled = true;
+            if (item.textContent === current.answer) {
+              item.classList.add('correct');
+            }
+          });
+
+          if (option === current.answer) {
+            acupointScore += 1;
+            acupointScoreEl.textContent = acupointScore;
+            acupointStatusEl.textContent = `正確！「${current.answer}」就是這個穴位。`;
+          } else {
+            const wrongButton = Array.from(allButtons).find((item) => item.textContent === option);
+            if (wrongButton) {
+              wrongButton.classList.add('wrong');
+            }
+            acupointStatusEl.textContent = `答錯了，正確是「${current.answer}」。`;
+          }
+
+          setTimeout(() => {
+            acupointIndex += 1;
+            if (acupointIndex < acupointQuestions.length) {
+              renderAcupointQuestion();
+            } else {
+              renderAcupointQuestion();
+            }
+          }, 1200);
+        });
+
+        acupointOptionsEl.appendChild(button);
+      });
+    }
+
+    function resetAcupointQuiz() {
+      const shuffledQuestions = shuffleArray(acupointQuestions);
+      acupointIndex = 0;
+      acupointScore = 0;
+      acupointLocked = false;
+      acupointQuestions.length = 0;
+      acupointQuestions.push(...shuffledQuestions);
+      acupointScoreEl.textContent = acupointScore;
+      acupointProgressEl.textContent = `0 / ${acupointQuestions.length}`;
+      acupointStatusEl.textContent = '穴位速答挑戰開始，請依提示選出正確穴位。';
+      renderAcupointQuestion();
+    }
+
+    acupointStartButton.addEventListener('click', () => {
+      resetAcupointQuiz();
+    });
+
+    acupointResetButton.addEventListener('click', () => {
+      resetAcupointQuiz();
+    });
+
     resetQuiz();
+    resetAcupointQuiz();
   </script>
 </body>
 </html>
