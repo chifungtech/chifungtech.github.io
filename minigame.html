@@ -534,6 +534,7 @@
       <a href="#star-game">星星遊戲</a>
       <a href="#tcm-game">辨證測驗</a>
       <a href="#acupoint-game">穴位速答</a>
+      <a href="#constitution-game">體質測驗</a>
     </nav>
 
     <section class="game-shell" id="star-game">
@@ -658,6 +659,40 @@
       </div>
 
       <p id="acupoint-status" class="status">點擊「開始配對」，把穴位與描述記得更牢。</p>
+    </section>
+
+    <section class="game-card tcm-game-section" id="constitution-game">
+      <div class="game-header">
+        <p class="eyebrow">體質保養</p>
+        <h1>中醫體質小測驗</h1>
+        <p class="game-lead">根據常見生活表現，選出最貼近的中醫體質狀態。每答對一題都能更了解自己的日常調理方向。</p>
+      </div>
+
+      <div class="quiz-shell">
+        <div class="quiz-card">
+          <p class="quiz-label">判斷題</p>
+          <h2 id="constitution-question">準備中</h2>
+          <div id="constitution-options" class="option-grid" aria-live="polite"></div>
+        </div>
+
+        <div class="quiz-side">
+          <div class="quiz-box">
+            <span>得分</span>
+            <strong id="constitution-score">0</strong>
+          </div>
+          <div class="quiz-box">
+            <span>題目</span>
+            <strong id="constitution-progress">0 / 0</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="constitution-start" class="button" type="button">開始測驗</button>
+        <button id="constitution-reset" class="button button--secondary" type="button">重新開始</button>
+      </div>
+
+      <p id="constitution-status" class="status">點擊「開始測驗」，看看你的體質傾向是什麼。</p>
     </section>
   </main>
 
@@ -1069,7 +1104,138 @@
       resetAcupointQuiz();
     });
 
+    const constitutionQuestions = [
+      {
+        prompt: '你經常怕冷，手腳冰冷，腰膝痠軟，最可能偏向哪種體質？',
+        answer: '腎陽不足',
+        options: ['腎陽不足', '肝氣鬱結', '氣虛', '陰虛']
+      },
+      {
+        prompt: '你容易口乾、心煩、晚上失眠，且舌紅少苔，常偏向哪種體質？',
+        answer: '陰虛',
+        options: ['陰虛', '脾胃虛弱', '痰濕', '血瘀']
+      },
+      {
+        prompt: '你會感到胸悶、易怒、睡不好，日常壓力大，最可能屬於哪種體質？',
+        answer: '肝氣鬱結',
+        options: ['肝氣鬱結', '氣虛', '腎陽不足', '痰濕']
+      },
+      {
+        prompt: '你容易疲倦、氣短、說話沒勁，活動後更明顯，較符合哪種體質？',
+        answer: '氣虛',
+        options: ['氣虛', '陰虛', '血瘀', '腎陽不足']
+      },
+      {
+        prompt: '你容易食欲差、腹脹、容易感到疲累，最可能偏向哪種體質？',
+        answer: '脾胃虛弱',
+        options: ['脾胃虛弱', '痰濕', '肝火旺', '血瘀']
+      },
+      {
+        prompt: '你較容易頭痛、口苦、心煩易怒，可能偏向哪種體質？',
+        answer: '肝火旺',
+        options: ['肝火旺', '氣虛', '腎陽不足', '陰虛']
+      }
+    ];
+
+    const constitutionQuestionEl = document.getElementById('constitution-question');
+    const constitutionOptionsEl = document.getElementById('constitution-options');
+    const constitutionScoreEl = document.getElementById('constitution-score');
+    const constitutionProgressEl = document.getElementById('constitution-progress');
+    const constitutionStatusEl = document.getElementById('constitution-status');
+    const constitutionStartButton = document.getElementById('constitution-start');
+    const constitutionResetButton = document.getElementById('constitution-reset');
+
+    let constitutionIndex = 0;
+    let constitutionScore = 0;
+    let constitutionLocked = false;
+
+    function renderConstitutionQuestion() {
+      const current = constitutionQuestions[constitutionIndex];
+      if (!current) {
+        constitutionQuestionEl.textContent = '測驗完成';
+        constitutionOptionsEl.innerHTML = '';
+        constitutionProgressEl.textContent = `${constitutionQuestions.length} / ${constitutionQuestions.length}`;
+        const gradeText = constitutionScore >= 5 ? '體質觀察很細緻！' : constitutionScore >= 3 ? '已經有基本辨識能力！' : '再多了解一些體質特徵吧。';
+        constitutionStatusEl.textContent = `${gradeText} 你答對了 ${constitutionScore} 題。`;
+        constitutionLocked = true;
+        return;
+      }
+
+      constitutionQuestionEl.textContent = current.prompt;
+      constitutionProgressEl.textContent = `${constitutionIndex + 1} / ${constitutionQuestions.length}`;
+      constitutionOptionsEl.innerHTML = '';
+      constitutionLocked = false;
+
+      const shuffledOptions = shuffleOptions(current.options);
+
+      shuffledOptions.forEach((option) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'option-btn';
+        button.textContent = option;
+
+        button.addEventListener('click', () => {
+          if (constitutionLocked) return;
+          constitutionLocked = true;
+
+          const allButtons = constitutionOptionsEl.querySelectorAll('.option-btn');
+          allButtons.forEach((item) => {
+            item.disabled = true;
+            if (item.textContent === current.answer) {
+              item.classList.add('correct');
+            }
+          });
+
+          if (option === current.answer) {
+            constitutionScore += 1;
+            constitutionScoreEl.textContent = constitutionScore;
+            constitutionStatusEl.textContent = `正確！「${current.answer}」是較符合的體質傾向。`;
+          } else {
+            const wrongButton = Array.from(allButtons).find((item) => item.textContent === option);
+            if (wrongButton) {
+              wrongButton.classList.add('wrong');
+            }
+            constitutionStatusEl.textContent = `答錯了，正確答案是「${current.answer}」。`;
+          }
+
+          setTimeout(() => {
+            constitutionIndex += 1;
+            if (constitutionIndex < constitutionQuestions.length) {
+              renderConstitutionQuestion();
+            } else {
+              renderConstitutionQuestion();
+            }
+          }, 1200);
+        });
+
+        constitutionOptionsEl.appendChild(button);
+      });
+    }
+
+    function resetConstitutionGame() {
+      const shuffledQuestions = shuffleArray(constitutionQuestions);
+      constitutionIndex = 0;
+      constitutionScore = 0;
+      constitutionLocked = false;
+      constitutionQuestions.length = 0;
+      constitutionQuestions.push(...shuffledQuestions);
+      constitutionScoreEl.textContent = constitutionScore;
+      constitutionProgressEl.textContent = `0 / ${constitutionQuestions.length}`;
+      constitutionStatusEl.textContent = '中醫體質小測驗開始，請選出最符合的描述。';
+      renderConstitutionQuestion();
+    }
+
+    constitutionStartButton.addEventListener('click', () => {
+      resetConstitutionGame();
+    });
+
+    constitutionResetButton.addEventListener('click', () => {
+      resetConstitutionGame();
+    });
+
+    resetQuiz();
     resetAcupointQuiz();
+    resetConstitutionGame();
   </script>
 </body>
 </html>
