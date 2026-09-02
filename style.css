@@ -86,6 +86,70 @@ img {
   row-gap: 6px;
 }
 
+.nav-item {
+  position: relative;
+  padding-bottom: 10px;
+  margin-bottom: -10px;
+}
+
+.nav-link,
+.site-nav > a,
+.submenu a {
+  color: #5b4b3d;
+  font-weight: 700;
+  font-size: 1.08rem;
+  padding: 10px 12px;
+  border-radius: 999px;
+  line-height: 1.35;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  display: grid;
+  min-width: 200px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(122, 59, 59, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 14px 28px rgba(95, 72, 58, 0.12);
+  padding: 10px;
+  z-index: 1200;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s;
+}
+
+.nav-item:hover .submenu,
+.nav-item:focus-within .submenu,
+.nav-item.open .submenu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+.submenu a {
+  justify-content: flex-start;
+  width: 100%;
+  background: #f8f0e8;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.submenu a:hover,
+.submenu a:focus-visible {
+  background: #f0dfcc;
+}
+
 .nav-toggle {
   display: none;
   background: #7a3b3b;
@@ -98,17 +162,10 @@ img {
   cursor: pointer;
 }
 
-.site-nav a {
-  color: #5b4b3d;
-  font-weight: 700;
-  font-size: 1.08rem;
-  padding: 10px 12px;
-  border-radius: 999px;
-  line-height: 1.35;
-}
-
 .site-nav a.active,
-.site-nav a:hover {
+.site-nav a:hover,
+.nav-link.active,
+.nav-link:hover {
   color: #7a3b3b;
   background: rgba(241, 228, 213, 0.9);
 }
@@ -1299,13 +1356,46 @@ ul, ol {
     display: flex;
   }
 
-  .site-nav a {
+  .nav-item {
+    width: 100%;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .nav-item .nav-link,
+  .nav-item .submenu a,
+  .site-nav > a {
     display: block;
     width: 100%;
     padding: 10px 14px;
     font-size: 1.05rem;
     background: #fffdf9;
     border-radius: 12px;
+    text-align: left;
+  }
+
+  .submenu {
+    position: static;
+    display: none;
+    width: 100%;
+    min-width: 0;
+    margin-top: 6px;
+    padding: 6px 0 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    transition: none;
+  }
+
+  .nav-item.open .submenu,
+  .nav-item:hover .submenu,
+  .nav-item:focus-within .submenu {
+    display: grid;
   }
 }
 

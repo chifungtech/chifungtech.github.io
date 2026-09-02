@@ -32,6 +32,85 @@ if (navToggle && header) {
   });
 }
 
+const navItems = document.querySelectorAll('.nav-item');
+
+navItems.forEach((item) => {
+  const menuLink = item.querySelector('.nav-link');
+  let closeTimer;
+
+  const closeMenu = () => {
+    item.classList.remove('open');
+    if (menuLink) {
+      menuLink.setAttribute('aria-expanded', 'false');
+    }
+  };
+
+  const openMenu = () => {
+    navItems.forEach((navItem) => {
+      navItem.classList.remove('open');
+      const navLink = navItem.querySelector('.nav-link');
+      if (navLink) {
+        navLink.setAttribute('aria-expanded', 'false');
+      }
+    });
+    item.classList.add('open');
+    if (menuLink) {
+      menuLink.setAttribute('aria-expanded', 'true');
+    }
+  };
+
+  item.addEventListener('mouseenter', () => {
+    if (window.innerWidth > 800) {
+      window.clearTimeout(closeTimer);
+      openMenu();
+    }
+  });
+
+  item.addEventListener('mouseleave', () => {
+    if (window.innerWidth > 800) {
+      window.clearTimeout(closeTimer);
+      closeTimer = window.setTimeout(closeMenu, 150);
+    }
+  });
+
+  item.addEventListener('focusin', () => {
+    if (window.innerWidth > 800) {
+      openMenu();
+    }
+  });
+
+  item.addEventListener('focusout', (event) => {
+    if (window.innerWidth > 800 && !item.contains(event.relatedTarget)) {
+      window.clearTimeout(closeTimer);
+      closeTimer = window.setTimeout(closeMenu, 150);
+    }
+  });
+
+  if (menuLink) {
+    menuLink.setAttribute('aria-expanded', 'false');
+
+    const toggleMobileMenu = (event) => {
+      if (window.innerWidth <= 800) {
+        event.preventDefault();
+        const isOpen = item.classList.contains('open');
+        if (isOpen) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      }
+    };
+
+    menuLink.addEventListener('click', toggleMobileMenu);
+    menuLink.addEventListener('touchstart', (event) => {
+      if (window.innerWidth <= 800) {
+        event.preventDefault();
+        toggleMobileMenu(event);
+      }
+    }, { passive: false });
+  }
+});
+
 const whatsAppButton = document.querySelector('.whatsapp-float');
 const inlineWhatsAppButtons = document.querySelectorAll('a[href*="wa.me"]:not(.whatsapp-float)');
 
