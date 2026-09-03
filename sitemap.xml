@@ -25,6 +25,12 @@
     <priority>0.90</priority>
   </url>
   <url>
+    <loc>https://chifungtech.github.io/four-seasons.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://chifungtech.github.io/manual-therapy.html</loc>
     <lastmod>2026-09-02</lastmod>
     <changefreq>monthly</changefreq>
