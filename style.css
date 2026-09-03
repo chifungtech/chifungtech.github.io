@@ -1233,6 +1233,39 @@ ul, ol {
   margin: 0;
 }
 
+.service-list article a,
+.faq-link,
+.article-summary a,
+.article-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  margin-top: 0.8rem;
+  color: #fffdfb;
+  font-weight: 800;
+  text-decoration: none;
+  border: 1px solid rgba(122, 59, 59, 0.12);
+  background: linear-gradient(135deg, #8d4a4a 0%, #7a3b3b 100%);
+  box-shadow: 0 8px 18px rgba(122, 59, 59, 0.18);
+  border-radius: 999px;
+  padding: 0.42rem 0.86rem 0.38rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.service-list article a:hover,
+.service-list article a:focus-visible,
+.faq-link:hover,
+.faq-link:focus-visible,
+.article-summary a:hover,
+.article-summary a:focus-visible,
+.article-cta a:hover,
+.article-cta a:focus-visible {
+  color: #fffdfb;
+  box-shadow: 0 12px 22px rgba(122, 59, 59, 0.22);
+  filter: brightness(1.03);
+  transform: translateX(2px);
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
