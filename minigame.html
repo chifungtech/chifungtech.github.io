@@ -809,10 +809,19 @@
       const difficulty = 0.08 + (index / levelTotal) * 0.2;
       const pattern = index % 5;
       const safeCells = new Set();
+      safeCells.add('3,2');
+      safeCells.add('3,6');
       for (let column = 1; column <= 7; column += 1) safeCells.add(`2,${column}`);
       for (let row = 2; row <= 6; row += 1) safeCells.add(`${row},2`);
       for (let column = 2; column <= 7; column += 1) safeCells.add(`6,${column}`);
-      if (index >= 15) for (let row = 3; row <= 6; row += 1) safeCells.add(`${row},6`);
+      for (let row = 2; row <= 6; row += 1) safeCells.add(`${row},6`);
+      if (index >= 15) {
+        for (let column = 2; column <= 6; column += 1) safeCells.add(`4,${column}`);
+        safeCells.add('5,2');
+        safeCells.add('5,3');
+        safeCells.add('5,6');
+        safeCells.add('3,4');
+      }
       const layout = Array.from({ length: size }, (_, row) => Array.from({ length: size }, (_, column) => {
         if (row === 0 || column === 0 || row === size - 1 || column === size - 1) return '#';
         const key = `${row},${column}`;
@@ -829,8 +838,8 @@
       }).join(''));
       const goalColumn = 3 + (index % (index >= 15 ? 4 : 5));
       const boxes = index >= 15 ? [[3, 2], [3, 6]] : [[3, 2]];
-      const goals = index >= 15 ? [[6, goalColumn], [6, 7]] : [[6, goalColumn]];
-      return { size, layout, player: [6, 1], boxes, goals };
+      const goals = index >= 15 ? [[6, 2], [6, 7]] : [[6, 2]];
+      return { size, layout, player: [6, 2], boxes, goals };
     }
 
     const levelData = Array.from({ length: levelTotal }, (_, index) => createLevel(index));
