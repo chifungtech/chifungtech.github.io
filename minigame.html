@@ -66,7 +66,7 @@
     .eyebrow {
       margin: 0 0 10px;
       font-size: 0.8rem;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       color: #7a3b3b;
       font-weight: 800;
@@ -81,8 +81,11 @@
 
     .game-lead {
       margin: 12px 0 0;
-      color: #6a584d;
-      font-weight: 600;
+      max-width: 42rem;
+      color: #4f4038;
+      font-size: 1rem;
+      line-height: 1.6;
+      font-weight: 500;
     }
 
     .game-board-wrap {
@@ -271,9 +274,10 @@
 
     .mini-card p,
     .mini-card li {
-      color: #564d47;
-      line-height: 1.7;
-      font-weight: 600;
+      color: #443a35;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      font-weight: 500;
     }
 
     .mini-card ul {
@@ -284,8 +288,10 @@
     .status {
       margin-top: 12px;
       min-height: 30px;
-      color: var(--stone-dark);
-      font-weight: 800;
+      color: #44302a;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      font-weight: 700;
     }
 
     .game-jump-nav {
@@ -520,15 +526,28 @@
     }
 
     @media (max-width: 640px) {
+      .game-page { padding: 16px 10px 40px; }
+      .game-card { padding: 16px 12px; border-radius: 16px; }
+      .game-header h1 { font-size: 1.8rem; }
+      .game-lead { font-size: 0.92rem; line-height: 1.55; }
       .game-board-wrap {
         min-height: 0;
+        border-radius: 16px;
       }
 
-      .game-board { padding: 10px; gap: 3px; }
+      .game-board { width: 100%; padding: 8px; gap: 2px; }
 
       .hud {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
       }
+
+      .score-box { padding: 10px 5px; border-radius: 10px; }
+      .score-box span { font-size: 0.62rem; letter-spacing: 0.04em; }
+      .score-box strong { font-size: 1.25rem; margin-top: 4px; }
+
+      .level-picker { gap: 7px; }
+      .level-picker select { min-width: 0; flex: 1; }
 
       .controls {
         flex-direction: column;
@@ -537,7 +556,10 @@
 
       .button {
         width: 100%;
+        min-height: 48px;
       }
+
+      .direction-pad { margin: 14px auto 0; }
     }
   </style>
 </head>
@@ -580,7 +602,7 @@
         <div class="game-header">
           <p class="eyebrow">推箱子挑戰</p>
           <h1>多箱推箱子</h1>
-          <p class="game-lead">把所有木箱推到金色目標點。後段關卡會加入更多箱子與障礙，挑戰 50 個各有特色的關卡。</p>
+          <p class="game-lead">將所有箱子推到目標。後面的關卡會有更多箱子和障礙，共 50 關。</p>
         </div>
 
         <div class="game-board-wrap">
@@ -622,9 +644,9 @@
         <div class="mini-card">
           <h2>玩法說明</h2>
           <ul>
-            <li>使用鍵盤方向鍵或下方方向按鈕移動。</li>
-            <li>箱子只能推，不能拉；後段關卡要把所有箱子推到目標。</li>
-            <li>完成的關卡會保存，下次回來可以直接選擇。</li>
+            <li>用方向鍵或下方按鈕移動。</li>
+            <li>箱子只能推，不能拉。</li>
+            <li>把所有箱子推到目標就能過關。</li>
           </ul>
         </div>
 
