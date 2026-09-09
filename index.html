@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html lang="zh-HK">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.google.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.google.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://googleads.g.doubleclick.net https://ad.doubleclick.net; frame-src 'self' https://www.youtube-nocookie.com;" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18321476060"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'AW-18321476060');
+  </script>
+
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.google.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.google.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://googleads.g.doubleclick.net https://ad.doubleclick.net; frame-src 'self' https://www.youtube-nocookie.com;" />
   <link rel="canonical" href="https://chifungtech.github.io/" />
   <meta name="robots" content="index,follow" />
   <meta name="author" content="智鋒中醫" />
@@ -47,6 +59,7 @@
   <link rel="shortcut icon" href="taichi_favicon.ico" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="智鋒中醫">
@@ -59,7 +72,8 @@
       <a href="about.html">關於我們</a>
       <a href="services.html">服務項目</a>
       <div class="nav-item">
-        <button class="nav-link" type="button" aria-expanded="false" aria-controls="health-articles-menu" aria-label="開啟健康文章選單">健康文章</button>
+        <button class="nav-link" type="button" aria-expanded="false" aria-controls="health-articles-menu"
+          aria-label="開啟健康文章選單">健康文章</button>
         <div id="health-articles-menu" class="submenu" aria-label="健康文章分類">
           <a href="article.html">健康文章</a>
           <a href="four-seasons.html">四季養生</a>
@@ -84,7 +98,8 @@
           <a class="button button--secondary" href="services.html">了解服務</a>
         </div>
       </div>
-      <img src="hero.png" alt="智鋒中醫手法按壓海報" width="1200" height="900" loading="eager" fetchpriority="high" decoding="async" sizes="(max-width: 700px) 100vw, 100vw" />
+      <img src="hero.png" alt="智鋒中醫手法按壓海報" width="1200" height="900" loading="eager" fetchpriority="high"
+        decoding="async" sizes="(max-width: 700px) 100vw, 100vw" />
     </section>
 
     <section class="home-start card" aria-labelledby="start-title">
@@ -124,12 +139,9 @@
       <div class="video-frame">
         <iframe
           src="https://www.youtube-nocookie.com/embed/videoseries?list=PLayP5TBPUPYQ&amp;origin=https%3A%2F%2Fchifungtech.github.io"
-          title="YouTube video player"
-          loading="eager"
-          frameborder="0"
+          title="YouTube video player" loading="eager" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          referrerpolicy="no-referrer-when-downgrade"
-          allowfullscreen></iframe>
+          referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
       </div>
     </section>
 
@@ -191,9 +203,12 @@
     <section class="card gallery-card">
       <h2>診間與服務實景</h2>
       <div class="gallery">
-        <img src="pic1.jpg" alt="溫馨中醫診間一角，展示舒適就診環境" width="800" height="600" loading="lazy" decoding="async" sizes="(max-width: 700px) 100vw, 33vw" />
-        <img src="pic2.jpg" alt="治療中醫師向患者解說手法調理過程" width="800" height="600" loading="lazy" decoding="async" sizes="(max-width: 700px) 100vw, 33vw" />
-        <img src="pic3.jpg" alt="舒適診療空間，強調放鬆與整體健康氛圍" width="800" height="600" loading="lazy" decoding="async" sizes="(max-width: 700px) 100vw, 33vw" />
+        <img src="pic1.jpg" alt="溫馨中醫診間一角，展示舒適就診環境" width="800" height="600" loading="lazy" decoding="async"
+          sizes="(max-width: 700px) 100vw, 33vw" />
+        <img src="pic2.jpg" alt="治療中醫師向患者解說手法調理過程" width="800" height="600" loading="lazy" decoding="async"
+          sizes="(max-width: 700px) 100vw, 33vw" />
+        <img src="pic3.jpg" alt="舒適診療空間，強調放鬆與整體健康氛圍" width="800" height="600" loading="lazy" decoding="async"
+          sizes="(max-width: 700px) 100vw, 33vw" />
       </div>
     </section>
   </main>
@@ -215,7 +230,9 @@
     <p class="disclaimer">醫療免責聲明：本網站內容僅供一般健康資訊參考，不構成醫療建議或診斷。若有健康疑慮，請洽詢合資格醫療專業人員。</p>
   </footer>
 
-  <a href="https://wa.me/85261446243?text=你好，我想查詢中醫手法調理預約。請先告訴我最困擾的部位與狀況，謝謝。" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="立即透過 WhatsApp 聯絡智鋒中醫">立即 WhatsApp 我們</a>
+  <a href="https://wa.me/85261446243?text=你好，我想查詢中醫手法調理預約。請先告訴我最困擾的部位與狀況，謝謝。" target="_blank" rel="noopener noreferrer"
+    class="whatsapp-float" aria-label="立即透過 WhatsApp 聯絡智鋒中醫">立即 WhatsApp 我們</a>
 
 </body>
+
 </html>
