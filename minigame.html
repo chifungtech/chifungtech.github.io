@@ -796,6 +796,8 @@
     const directions = { up: [-1, 0], left: [0, -1], down: [1, 0], right: [0, 1] };
     const levelTotal = 50;
     const completedLevels = new Set(JSON.parse(localStorage.getItem('sokobanCompletedLevels') || '[]'));
+    const usedLevelSignatures = new Set();
+    const usedBoxStarts = new Set();
     let currentLevel = 1;
     let gameState;
 
@@ -804,45 +806,182 @@
       return value - Math.floor(value);
     }
 
-    function createLevel(index) {
-      const size = 9;
-      const difficulty = 0.08 + (index / levelTotal) * 0.2;
-      const pattern = index % 5;
-      const safeCells = new Set();
-      safeCells.add('3,2');
-      safeCells.add('3,6');
-      for (let column = 1; column <= 7; column += 1) safeCells.add(`2,${column}`);
-      for (let row = 2; row <= 6; row += 1) safeCells.add(`${row},2`);
-      for (let column = 2; column <= 7; column += 1) safeCells.add(`6,${column}`);
-      for (let row = 2; row <= 6; row += 1) safeCells.add(`${row},6`);
-      if (index >= 15) {
-        for (let column = 2; column <= 6; column += 1) safeCells.add(`4,${column}`);
-        safeCells.add('5,2');
-        safeCells.add('5,3');
-        safeCells.add('5,6');
-        safeCells.add('3,4');
-      }
-      const layout = Array.from({ length: size }, (_, row) => Array.from({ length: size }, (_, column) => {
-        if (row === 0 || column === 0 || row === size - 1 || column === size - 1) return '#';
-        const key = `${row},${column}`;
-        const patternWall = pattern === 1
-          ? (row === 3 || row === 5) && column % 3 !== 0
-          : pattern === 2
-            ? row >= 3 && row <= 5 && column >= 3 && column <= 5 && !(row === 4 && column === 4)
-            : pattern === 3
-              ? (column === 3 || column === 5) && row % 3 !== 0
-              : pattern === 4
-                ? (row === 4 && column !== 4) || (column === 4 && row !== 4)
-                : false;
-        return safeCells.has(key) || (!patternWall && seededRandom((index + 1) * 100 + row * 11 + column) > difficulty) ? '.' : '#';
-      }).join(''));
-      const goalColumn = 3 + (index % (index >= 15 ? 4 : 5));
-      const boxes = index >= 15 ? [[3, 2], [3, 6]] : [[3, 2]];
-      const goals = index >= 15 ? [[6, 2], [6, 7]] : [[6, 2]];
-      return { size, layout, player: [6, 2], boxes, goals };
+    function positionKey(coords) {
+      return coords.map(([row, column]) => `${row},${column}`).sort().join('|');
     }
 
-    const levelData = Array.from({ length: levelTotal }, (_, index) => createLevel(index));
+    function isLevelSolvable(level) {
+      const walls = new Set();
+      const goals = new Set(level.goals.map(([row, column]) => `${row},${column}`));
+      const rows = level.layout.length;
+      const columns = level.layout[0].length;
+      for (let row = 0; row < rows; row += 1) {
+        for (let column = 0; column < columns; column += 1) {
+          if (level.layout[row][column] === '#') walls.add(`${row},${column}`);
+        }
+      }
+      const queue = [{ player: [...level.player], boxes: level.boxes.map(([row, column]) => [row, column]) }];
+      const visited = new Set([JSON.stringify({ player: level.player, boxes: level.boxes.map(([row, column]) => `${row},${column}`).sort() })]);
+      const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+
+      while (queue.length > 0) {
+        const state = queue.shift();
+        const boxPlacedOnGoal = state.boxes.every(([row, column]) => goals.has(`${row},${column}`));
+        if (boxPlacedOnGoal) return true;
+
+        for (const [rowDelta, columnDelta] of directions) {
+          const nextPlayer = [state.player[0] + rowDelta, state.player[1] + columnDelta];
+          const nextPlayerKey = `${nextPlayer[0]},${nextPlayer[1]}`;
+          if (walls.has(nextPlayerKey)) continue;
+
+          const boxIndex = state.boxes.findIndex(([row, column]) => row === nextPlayer[0] && column === nextPlayer[1]);
+          if (boxIndex !== -1) {
+            const beyond = [nextPlayer[0] + rowDelta, nextPlayer[1] + columnDelta];
+            const beyondKey = `${beyond[0]},${beyond[1]}`;
+            if (walls.has(beyondKey)) continue;
+            if (state.boxes.some(([row, column], index) => index !== boxIndex && row === beyond[0] && column === beyond[1])) continue;
+
+            const nextBoxes = state.boxes.map((box, index) => (index === boxIndex ? beyond : box));
+            const stateKey = JSON.stringify({ player: nextPlayer, boxes: nextBoxes.map(([row, column]) => `${row},${column}`).sort() });
+            if (!visited.has(stateKey)) {
+              visited.add(stateKey);
+              queue.push({ player: nextPlayer, boxes: nextBoxes });
+            }
+          } else {
+            const stateKey = JSON.stringify({ player: nextPlayer, boxes: state.boxes.map(([row, column]) => `${row},${column}`).sort() });
+            if (!visited.has(stateKey)) {
+              visited.add(stateKey);
+              queue.push({ player: nextPlayer, boxes: state.boxes.map(([row, column]) => [row, column]) });
+            }
+          }
+        }
+      }
+
+      return false;
+    }
+
+    function createLevel(index) {
+      const size = 9;
+      const patternFactories = [
+        (row, column, seed) => (row === 3 || row === 5) && column % 3 !== 0 && seededRandom(seed + row * 13 + column * 17) > 0.18,
+        (row, column, seed) => row >= 2 && row <= 6 && column >= 2 && column <= 6 && !(row === 4 && column === 4) && ((row === 3 || row === 5) && column % 2 === 0 || (column === 3 || column === 5) && row % 2 === 0) && seededRandom(seed + row * 7 + column * 19) > 0.22,
+        (row, column, seed) => ((column === 3 || column === 5) && row % 3 !== 0) || ((row === 3 || row === 5) && column % 3 === 0) && seededRandom(seed + row * 11 + column * 23) > 0.2,
+        (row, column, seed) => (row === 4 && column !== 4) || (column === 4 && row !== 4) && seededRandom(seed + row * 9 + column * 13) > 0.18,
+        (row, column, seed) => row >= 2 && row <= 6 && column >= 2 && column <= 6 && (row + column) % 4 === 0 && seededRandom(seed + row * 17 + column * 29) > 0.28
+      ];
+      const boxCandidates = [
+        [2, 2], [2, 4], [2, 6], [3, 2], [3, 4], [3, 6], [4, 2], [4, 4], [4, 6],
+        [5, 2], [5, 4], [5, 6], [6, 2], [6, 4], [6, 6]
+      ];
+      const goalCandidates = [
+        [2, 2], [2, 4], [2, 6], [3, 2], [3, 4], [3, 6], [4, 2], [4, 6], [5, 2], [5, 4], [5, 6], [6, 2], [6, 4], [6, 6]
+      ];
+
+      for (let attempt = 0; attempt < 350; attempt += 1) {
+        const patternIndex = (index + attempt) % patternFactories.length;
+        const seed = index * 997 + attempt * 131 + patternIndex * 17;
+        const boxCount = index < 15 ? 1 : index < 30 ? 2 : 3;
+        const layout = Array.from({ length: size }, (_, row) => Array.from({ length: size }, (_, column) => {
+          if (row === 0 || column === 0 || row === size - 1 || column === size - 1) return '#';
+          if (row === 4 && column === 4) return '.';
+          const wallPattern = patternFactories[patternIndex](row, column, seed);
+          const extraBarrier = index >= 15 && ((row === 4 && column !== 4) || (column === 4 && row !== 4)) && seededRandom(seed + row * 11 + column * 7) > 0.25;
+          return wallPattern || extraBarrier ? '#' : '.';
+        }));
+
+        const allowedBoxCells = boxCandidates.filter(([row, column]) => layout[row][column] === '.');
+        if (allowedBoxCells.length < boxCount) continue;
+
+        const orderedBoxes = [];
+        const usedDuringSelection = new Set();
+        for (let boxIndex = 0; boxIndex < boxCount; boxIndex += 1) {
+          const candidateIndex = (index * 7 + boxIndex * 11 + attempt * 13 + boxIndex * 17) % allowedBoxCells.length;
+          const nextCell = allowedBoxCells.splice(candidateIndex, 1)[0];
+          const boxKey = `${nextCell[0]},${nextCell[1]}`;
+          if (usedDuringSelection.has(boxKey)) {
+            allowedBoxCells.push(nextCell);
+            continue;
+          }
+          usedDuringSelection.add(boxKey);
+          orderedBoxes.push(nextCell);
+        }
+
+        if (orderedBoxes.length !== boxCount) continue;
+        if (usedBoxStarts.has(positionKey(orderedBoxes))) continue;
+
+        const openGoalCandidates = goalCandidates.filter(([row, column]) => {
+          if (layout[row][column] !== '.') return false;
+          return !orderedBoxes.some(([boxRow, boxColumn]) => boxRow === row && boxColumn === column);
+        });
+        if (openGoalCandidates.length < boxCount) continue;
+
+        const goals = [];
+        const usedGoals = new Set();
+        for (let goalIndex = 0; goalIndex < boxCount; goalIndex += 1) {
+          const candidateIndex = (index * 13 + goalIndex * 19 + attempt * 23 + goalIndex) % openGoalCandidates.length;
+          const goalCell = openGoalCandidates.splice(candidateIndex, 1)[0];
+          const goalKey = `${goalCell[0]},${goalCell[1]}`;
+          if (usedGoals.has(goalKey)) {
+            openGoalCandidates.push(goalCell);
+            continue;
+          }
+          usedGoals.add(goalKey);
+          goals.push(goalCell);
+        }
+
+        if (goals.length !== boxCount) continue;
+
+        const playerCandidates = [];
+        for (let row = 1; row < size - 1; row += 1) {
+          for (let column = 1; column < size - 1; column += 1) {
+            if (layout[row][column] === '.'
+              && !orderedBoxes.some(([boxRow, boxColumn]) => boxRow === row && boxColumn === column)
+              && !goals.some(([goalRow, goalColumn]) => goalRow === row && goalColumn === column)) {
+              playerCandidates.push([row, column]);
+            }
+          }
+        }
+        if (playerCandidates.length === 0) continue;
+
+        const player = playerCandidates[(index + attempt) % playerCandidates.length];
+        const candidateLevel = { size, layout, player, boxes: orderedBoxes, goals };
+        if (!isLevelSolvable(candidateLevel)) continue;
+
+        const levelSignature = `${layout.map((row) => row.join('')).join('\n')}|${positionKey(orderedBoxes)}|${positionKey(goals)}`;
+        if (usedLevelSignatures.has(levelSignature)) continue;
+        if (usedBoxStarts.has(positionKey(orderedBoxes))) continue;
+
+        return candidateLevel;
+      }
+
+      const fallbackBoxes = index < 15 ? [[2, 2]] : index < 30 ? [[2, 2], [6, 6]] : [[2, 2], [2, 6], [6, 2]];
+      const fallbackGoals = index < 15 ? [[6, 6]] : index < 30 ? [[6, 2], [2, 6]] : [[6, 6], [6, 2], [2, 6]];
+      const fallbackLayout = Array.from({ length: size }, (_, row) => Array.from({ length: size }, (_, column) => {
+        if (row === 0 || column === 0 || row === size - 1 || column === size - 1) return '#';
+        if ((row === 4 && column !== 4) || (column === 4 && row !== 4)) return '#';
+        return '.';
+      }));
+      const fallbackPlayer = [6, 2];
+      const fallbackLevel = { size, layout: fallbackLayout, player: fallbackPlayer, boxes: fallbackBoxes, goals: fallbackGoals };
+      const fallbackSignature = `${fallbackLayout.map((row) => row.join('')).join('\n')}|${positionKey(fallbackBoxes)}|${positionKey(fallbackGoals)}`;
+      if (usedLevelSignatures.has(fallbackSignature) || usedBoxStarts.has(positionKey(fallbackBoxes))) return null;
+      return fallbackLevel;
+    }
+
+    const generatedLevels = [];
+    while (generatedLevels.length < levelTotal) {
+      const candidate = createLevel(generatedLevels.length + 1);
+      if (!candidate) continue;
+      const candidateSignature = `${candidate.layout.map((row) => row.join('')).join('\n')}|${positionKey(candidate.boxes)}|${positionKey(candidate.goals)}`;
+      const candidateStartKey = positionKey(candidate.boxes);
+      if (usedLevelSignatures.has(candidateSignature) || usedBoxStarts.has(candidateStartKey)) continue;
+      usedLevelSignatures.add(candidateSignature);
+      usedBoxStarts.add(candidateStartKey);
+      generatedLevels.push(candidate);
+    }
+
+    const levelData = generatedLevels;
+    window.__sokobanLevels = levelData;
 
     function updateHud() {
       levelNumberEl.textContent = `${currentLevel} / ${levelTotal}`;
